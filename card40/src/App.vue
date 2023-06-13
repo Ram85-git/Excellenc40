@@ -6,6 +6,7 @@
         <div id="HA">
          <router-link to="/">Home</router-link> 
          <router-link to="/about">About</router-link>
+         <router-link to="/contect">Dashboard </router-link>
         </div> 
         </div>
       <img>
@@ -44,7 +45,7 @@ nav {
   
 }
 #HA{
-  flex-direction: initial;
+  flex-direction:initial;
   /* border: 1px solid; */
   width: 200px;
   font-size: 20px;

@@ -9,18 +9,18 @@
       <h1>Poll Management System</h1>
       <h3>Press here for Register</h3>
       <div class="text-center">
-       <v-btn
+       <!-- <v-btn
           :loading="loading"
           @click="loading = !loading"
         >
-        Sign Up
+        Sign In
 
         <template v-slot:loader>
         <v-progress-linear indeterminate></v-progress-linear>
         </template>
-        </v-btn>
+        </v-btn> -->
       </div>
-      <h3>Press here for Login </h3>
+      <!-- <h3>Press here for Login </h3>
       <div class="text-center">
        <v-btn
           :loading="loading"
@@ -32,24 +32,35 @@
         <v-progress-linear indeterminate></v-progress-linear>
         </template>
         </v-btn>
-      </div>
+      </div> -->
     </div>   
  </div>
   
 </div>
 
-
+<loginForm/>
 </template>
 
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-
+import LoginForm from '@/components/LoginForm.vue';
 export default {
   name: 'HomeView',
   components: {
+    LoginForm
     // HelloWorld
+  },
+  mounted(){
+    let user = localStorage.getItem('user-info');
+    if(!user){
+      this.$router.push({name:'SignUp'})
+    }
   }
+
+
+  
+
 }
 </script>
 <style scoped>
@@ -64,17 +75,17 @@ export default {
 .mainback{
   display: flex;
   /* flex-direction: column; */
-  background-image: url('https://img.freepik.com/free-vector/vibrant-summer-ombre-background-vector_53876-105765.jpg?w=360');
+  background-image: url('https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcGYtbWlzY3RleHR1cmUwMS1iZWVyLTAwMF81LmpwZw.jpg?s=HsmcUASyIhByOR7WVG7d5Bb0Sbc2LRpOGn1Wlh8gxgA');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 600px;
+  height: 700px;
   width: 1400px;
 }
 .mainback1{
-  /* border: 1px solid; */
+  border: 2px dotted green;
   height: 500px;
   margin: auto;
-  padding-top: 100px;
+  margin-top: 10px;
   
   
 }
