@@ -1,38 +1,15 @@
 <template>
   
-  <!-- <div class="main">
-   <h1> Poll Management System </h1>
-  </div> -->
+  
   <div class="main">
    <div class="mainback">
     <div class="mainback1">
       <h1>Poll Management System</h1>
       <h3>Press here for Register</h3>
       <div class="text-center">
-       <!-- <v-btn
-          :loading="loading"
-          @click="loading = !loading"
-        >
-        Sign In
-
-        <template v-slot:loader>
-        <v-progress-linear indeterminate></v-progress-linear>
-        </template>
-        </v-btn> -->
+      
       </div>
-      <!-- <h3>Press here for Login </h3>
-      <div class="text-center">
-       <v-btn
-          :loading="loading"
-          @click="loading = !loading"
-        >
-        log In
-
-        <template v-slot:loader>
-        <v-progress-linear indeterminate></v-progress-linear>
-        </template>
-        </v-btn>
-      </div> -->
+      
     </div>   
  </div>
   
@@ -42,14 +19,13 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+
 import LoginForm from '@/components/LoginForm.vue';
 export default {
   name: 'HomeView',
   components: {
     LoginForm
-    // HelloWorld
+    
   },
   mounted(){
     let user = localStorage.getItem('user-info');
@@ -68,9 +44,7 @@ export default {
   display: flex;
   
 }
-/* .main .mainback{
-  flex-direction: row;
-} */
+
 
 .mainback{
   display: flex;

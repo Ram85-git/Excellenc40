@@ -6,7 +6,7 @@
         <div id="HA">
          <router-link to="/">Home</router-link> 
          <router-link to="/about">About</router-link>
-         <router-link to="/contect">Dashboard </router-link>
+         <router-link to="/mainview">Main </router-link>
         </div> 
         </div>
       <img>
