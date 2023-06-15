@@ -54,6 +54,9 @@ export default {
   background-size: cover;
   height: 700px;
   width: 1400px;
+  max-width: 1400px;
+  margin: auto;
+  text-align: center;
 }
 .mainback1{
   border: 2px dotted green;

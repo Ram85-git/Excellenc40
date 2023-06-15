@@ -28,6 +28,9 @@
 }
 .home{
   display: flex;
+  max-width: 1400px;
+  margin: auto;
+  text-align: center;
 }
 
 nav {

@@ -57,11 +57,7 @@ export default {
 
   },
 
-  // computed: mapGetters(["allUsers"]),
-  // created() {
-
-  // }
-
+  
 }
 
 </script>
@@ -80,6 +76,9 @@ export default {
   background-size: cover;
   height: 700px;
   width: 1400px;
+  max-width: 1400px;
+  margin: auto;
+  text-align: center;
 
 
 }

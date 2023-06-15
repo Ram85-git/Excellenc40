@@ -28,7 +28,7 @@
 
 
 import { mapActions, } from 'vuex';
-
+// import { router } from '../router';
 export default {
   name:`LoginForm`,
   data() {
@@ -40,18 +40,20 @@ export default {
     };
   },
   methods: {
-
-    ...mapActions(["loginDetails"]),
+    // ...mapActions('auth' , ["loginDetails"]),
+    ...mapActions( ["loginDetails"]),
     login(){
-
+      this.$router.push('/mainview');
       this.loginDetails({
-       
+        
         username: this.username,
         password: this.password,
         role: this.role
-
-
       });
+      // this.loginDetails('main');
+      // router.push('/mainview');
+
+
     }
       
     },
