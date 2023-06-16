@@ -3,64 +3,91 @@
 
     <!-- <button @click="openPopupForm">Open Form</button> -->
     <div class="main">
-        <div>
-
-            <div class="fffff">
-                <br>
-
-                <v-btn color="blue" class="btbt" type="button" @click="openDialog">
-                    Add Poll
-                </v-btn>
-
-            </div>
-            <v-dialog v-model="dialogVisible" class="dig">
-                <v-card class="card">
-                    <v-card-title>
-                        <span class="headline">Add New Poll</span>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-form ref="formDialog">
-                            <v-text-field v-model="dialogTitle" label="Title" required></v-text-field>
-                            <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select>
-                            <!-- <li>{{ dialogTitle }}</li>
-                           <li>{{dialogSelect  }}</li> -->
-
-                        </v-form>
-                    </v-card-text>
-                    <v-card-actions>
-
-                        <v-btn color="blue" text @click="addPollFromDialog">Add New Poll</v-btn>
-                        <!-- <v-btn color="blue" text @click="EditPoll">Edit Poll</v-btn> -->
-                        <!-- <v-btn color="blue" text @click="DeletePoll">Delete Poll</v-btn> -->
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-            <table v-if="showTable">
-                <tr>
-                    <th id="heading" v-for="heading in tableData" :key="heading">{{ heading }}</th>
-
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Message</th>
-                </tr>
-                <tr v-for="(item,) in tableData" :key="item">
-                    <td>{{ item.dialogTitle }}</td>
-                    <td>{{ item.dialogSelect }}</td>
-                    <!-- <td>{{ item.message }}</td> -->
-                </tr>
-            </table>
 
 
-
+        <div class="fffff">
+            <br>
+            <v-btn color="blue" class="btbt" type="button" @click="openDialog">
+                Add Poll
+            </v-btn>
 
         </div>
+        <v-dialog v-model="dialogVisible" class="dig">
+            <v-card class="card">
+                <v-card-title>
+                    <span class="headline">Add New Poll</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-form ref="formDialog">
+                        <v-text-field v-model="dialogTitle" label="Title" required></v-text-field>
+                        <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select>
+                        <!-- <li>{{ dialogTitle }}</li>
+                           <li>{{dialogSelect  }}</li> -->
+
+                    </v-form>
+                </v-card-text>
+                <v-card-actions>
+
+                    <v-btn type="button" color="blue" text v-on:click.prevent="addPollFromDialog();
+                    submit();">Add New Poll</v-btn>
+                    <!-- <v-btn color="blue" text @click="EditPoll">Edit Poll</v-btn> -->
+                    <!-- <v-btn color="blue" text @click="DeletePoll">Delete Poll</v-btn> -->
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <!-- <table> -->
+            <!-- <thead> -->
+            <!-- <tr>
+                <th>Title</th>
+                <th>Option</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr> -->
+            <!-- </thead> -->
+            <!-- <tbody> -->
+            <!-- <tr v-for="item in tableData" :key="item" id="item">
+                <td>{{ item.title }}</td>
+                <td>{{ item.select }}</td>
+                <td><i class="fa-solid fa-trash" v-on:click.prevent="deleteItem()"></i></td>
+                <td><i class="fa-regular fa-pen-to-square" v-on:click.prevent="editItem()"></i></td>
+            </tr> -->
+            <!-- </tbody> -->
+        <!-- </table> -->
+        <v-table>
+            <thead>
+                <tr>
+                    <th class="text-left">
+                        Title
+                    </th>
+                    <th class="text-left">
+                        Option
+                    </th>
+                    <th class="text-left">
+                        Delete
+                    </th>
+                    <th class="text-left">
+                        Update
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in tableData" :key="item" id="item">
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.select }}</td>
+                    <td><i class="fa-solid fa-trash" v-on:click.prevent="deleteItem()"></i></td>
+                   <td><i class="fa-regular fa-pen-to-square" v-on:click.prevent="editItem()"></i></td>
+
+                </tr>
+            </tbody>
+        </v-table>
+
     </div>
 
     <PollCards />
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 // import { mapState } from 'vuex';
 import PollCards from '@/components/PollCards.vue';
 // import axios from 'axios';  
@@ -70,10 +97,11 @@ export default {
         PollCards
 
     },
+    
     data() {
         return {
-            title: '',
-            select: '',
+            title: "",
+            select: "",
             items: [
                 'val 1',
                 'val 2',
@@ -84,10 +112,10 @@ export default {
             ],
             dialogVisible: false,
 
-            dialogTitle: '',
+            dialogTitle: "",
 
             dialogSelect: null,
-            tableData: []
+            tableData: [],
 
 
 
@@ -101,75 +129,82 @@ export default {
             this.dialogVisible = false;
         },
 
-        ...mapActions(['addPoll']),
+        ...mapActions(['addPoll', 'deletePoll', 'editPoll','fetchData']),
         addPollFromDialog() {
             this.addPoll({
                 title: this.dialogTitle,
                 select: this.dialogSelect
             })
-            const newRow = {
-                // const newRow = {
-                title: this.dialogTitle,
-                option: this.dialogSelect
-            };
-            this.tableData.push(newRow);
-
-            // Reset the input fields
-            this.dialogTitle = '';
-            this.dialogSelect = null;
-
-            // Close the dialog
             this.dialogVisible = false;
+        },
+        deleteItem() {
+            this.deletePoll({
+                title: this.title,
+                select: this.select
+
+            })
+
+        },
+        editItem() {
+            this.editPoll({
+                title: this.title,
+                // select: this.select
+
+            })
+        },
 
 
+
+        submit: function () {
+            console.log("Value added", this.dialogTitle, this.dialogSelect);
+            this.tableData.push({
+                'title': this.dialogTitle,
+                'select': this.dialogSelect
+
+            })
+            this.dialogTitle = '';
+            this.dialogSelect = '';
         }
+        // const newRow = {
+        //     // const newRow = {
+        //     title: this.dialogTitle,
+        //     option: this.dialogSelect
+        // };
+        // this.tableData.push(newRow);
+
+        // // Reset the input fields
+        // this.dialogTitle = '';
+        // this.dialogSelect = null;
+
+        // // Close the dialog
+        // this.dialogVisible = false;
+
+
+        // }
     },
+    computed: mapGetters(["allPolls"]),
+
+
 
 
 };
 </script>
 <style scoped>
-table {
-    display: contents;
-    border: 1px solid;
-    height: 250px;
-    width: 250px;
-}
 
-table tr {
-    /* border: 1px solid green; */
-    height: 80px;
-    width: 40px;
-    margin-top: 10px;
-    color: #364140;
-}
-
-table tr th {
-    /* border: 1px solid brown; */
-    /* border-radius: 16px; */
-    height: 20px;
-    width: 350px;
-    text-align: center;
-    color: #364140;
-    /* background-color: rgba(54, 65, 64, 0.04); */
-    font-weight: 700;
-    border-radius: 30px;
+.v-table {
+    border: 2px solid;
+    width: 400px;
+    margin: auto;
 
 }
 
-table tr td {
-    /* border: 1px solid brown; */
-    height: 20px;
-    /* background-color: rgba(54, 65, 64, 0.04); */
-    width: 300px;
-    text-align: center;
-    color: #364140;
-    font-weight: 700;
-    border-radius: 30px;
-    /* margin-top: 20px; */
-    /* padding-top: 20px; */
+th,
+td {
+    padding: 20px;
+    border: 1px solid yellow;
+    padding-left: 20px;
+    color: black;
 }
-
 
 .main {
     /* background-color: rgb(173, 230, 173); */
@@ -224,4 +259,5 @@ button {
 .btbtt {
     margin-right: 12px;
 
-}</style>
+}
+</style>

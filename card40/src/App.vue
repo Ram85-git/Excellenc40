@@ -7,6 +7,7 @@
          <router-link to="/">Home</router-link> 
          <router-link to="/about">About</router-link>
          <router-link to="/mainview">Main </router-link>
+         <router-link to="/pollview">Poll view</router-link>
         </div> 
         </div>
       <img>
@@ -50,7 +51,7 @@ nav {
 #HA{
   flex-direction:initial;
   /* border: 1px solid; */
-  width: 200px;
+  width: 510px;
   font-size: 20px;
 
 

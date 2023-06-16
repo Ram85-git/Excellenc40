@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import SignupForm from '../components/SignupForm.vue'
 import LoginForm from '../components/LoginForm.vue'
 import MainView from '../views/MainView.vue'
+import PollView from '../views/PollView.vue'
 
 const routes = [
   {
@@ -34,6 +35,11 @@ const routes = [
     path: '/mainview',
     name: 'main',
     component: MainView
+  },
+  {
+    path: '/pollview',
+    name: 'poll',
+    component: PollView
   }
   
 ]

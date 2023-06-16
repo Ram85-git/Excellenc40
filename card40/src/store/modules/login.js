@@ -23,13 +23,14 @@ const actions = {
         commit("Set_login_status", res.data);
         console.log("Data login success  ", res.data);
         // this.$router.push('/mainview')
-    }
+    },
+    
 
 
 };
 
 const mutations = {
-    Set_login_status: (state,loginCredential) =>(state.loginCredential = loginCredential)
+    Set_login_status: (state,user1) =>(state.user1 = user1)
     
 };
 
