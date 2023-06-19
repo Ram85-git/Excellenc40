@@ -49,7 +49,7 @@ export default {
 .mainback{
   display: flex;
   /* flex-direction: column; */
-  background-image: url('https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcGYtbWlzY3RleHR1cmUwMS1iZWVyLTAwMF81LmpwZw.jpg?s=HsmcUASyIhByOR7WVG7d5Bb0Sbc2LRpOGn1Wlh8gxgA');
+  background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20190222/ourmid/pngtree-two-color-gradient-universal-background-material-color-matching-backgroundtwo-tone-image_51848.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   height: 700px;

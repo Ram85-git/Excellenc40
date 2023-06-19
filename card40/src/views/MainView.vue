@@ -21,6 +21,7 @@
                     <v-form ref="formDialog">
                         <v-text-field v-model="dialogTitle" label="Title" required></v-text-field>
                         <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select>
+                        <v-text-field v-model="dialogSelect"  label="Add option" hide-details="auto"></v-text-field>
                         <!-- <li>{{ dialogTitle }}</li>
                            <li>{{dialogSelect  }}</li> -->
 
@@ -36,22 +37,22 @@
             </v-card>
         </v-dialog>
         <!-- <table> -->
-            <!-- <thead> -->
-            <!-- <tr>
+        <!-- <thead> -->
+        <!-- <tr>
                 <th>Title</th>
                 <th>Option</th>
                 <th>Delete</th>
                 <th>Update</th>
             </tr> -->
-            <!-- </thead> -->
-            <!-- <tbody> -->
-            <!-- <tr v-for="item in tableData" :key="item" id="item">
+        <!-- </thead> -->
+        <!-- <tbody> -->
+        <!-- <tr v-for="item in tableData" :key="item" id="item">
                 <td>{{ item.title }}</td>
                 <td>{{ item.select }}</td>
                 <td><i class="fa-solid fa-trash" v-on:click.prevent="deleteItem()"></i></td>
                 <td><i class="fa-regular fa-pen-to-square" v-on:click.prevent="editItem()"></i></td>
             </tr> -->
-            <!-- </tbody> -->
+        <!-- </tbody> -->
         <!-- </table> -->
         <v-table>
             <thead>
@@ -74,8 +75,8 @@
                 <tr v-for="item in tableData" :key="item" id="item">
                     <td>{{ item.title }}</td>
                     <td>{{ item.select }}</td>
-                    <td><i class="fa-solid fa-trash" v-on:click.prevent="deleteItem()"></i></td>
-                   <td><i class="fa-regular fa-pen-to-square" v-on:click.prevent="editItem()"></i></td>
+                    <!-- <td><i class="fa-solid fa-trash" v-on:click.prevent="deleteItem()"></i></td>
+                    <td><i class="fa-regular fa-pen-to-square" v-on:click.prevent="editItem()"></i></td> -->
 
                 </tr>
             </tbody>
@@ -97,7 +98,7 @@ export default {
         PollCards
 
     },
-    
+
     data() {
         return {
             title: "",
@@ -113,7 +114,6 @@ export default {
             dialogVisible: false,
 
             dialogTitle: "",
-
             dialogSelect: null,
             tableData: [],
 
@@ -129,29 +129,33 @@ export default {
             this.dialogVisible = false;
         },
 
-        ...mapActions(['addPoll', 'deletePoll', 'editPoll','fetchData']),
+        // ...mapActions(['addPoll', 'deletePoll', 'editPoll', 'fetchData']),
+        ...mapActions(['addPoll', 'fetchData' ]),
+       
         addPollFromDialog() {
+            this.$router.push('/mainview');
+            this.$router.push('/pollview')
             this.addPoll({
                 title: this.dialogTitle,
                 select: this.dialogSelect
             })
             this.dialogVisible = false;
         },
-        deleteItem() {
-            this.deletePoll({
-                title: this.title,
-                select: this.select
+        // deleteItem() {
+        //     this.deletePoll({
+        //         title: this.title,
+        //         select: this.select
 
-            })
+        //     })
 
-        },
-        editItem() {
-            this.editPoll({
-                title: this.title,
-                // select: this.select
+        // },
+        // editItem() {
+        //     this.editPoll({
+        //         title: this.title,
+        //         // select: this.select
 
-            })
-        },
+        //     })
+        // },
 
 
 
@@ -190,7 +194,10 @@ export default {
 };
 </script>
 <style scoped>
-
+.dig{
+    margin: auto;
+    text-align: center;
+}
 .v-table {
     border: 2px solid;
     width: 400px;

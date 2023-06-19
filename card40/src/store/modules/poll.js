@@ -18,7 +18,7 @@ const getters = {
 const actions = {
 
     async addPoll(context, payload) {
-        const data = await axios.post(`http://65.108.77.50:3031/add_poll?title=${payload.title}%20polll&options=${payload.select}`);
+        const data = await axios.post(`http://65.108.77.50:3031/add_poll?title=${payload.title}%20&options=${payload.select}`);
         console.log("Poll list ", data);
 
     },
@@ -31,18 +31,28 @@ const actions = {
 
     // const edit= await axios.post(`http://65.108.77.50:3031/update_poll_title?id=648b101b404fcc93fa650efb&title=${payload.title}`)
     async deleteusers({ commit }, pollid) {
-        const deleuser = await axios.delete(`http://65.108.77.50:3031/delete_poll?id=${pollid}`)
+        const deleuser = await axios.delete(`http://65.108.77.50:3031/delete_poll?id=${pollid}`);
         // console.log(deleuser)
         alert("Delete SuccessFull")
         commit("snythin", deleuser);
     },
 
 
-    async editPoll({ commit }, editTitle) {
-        const response = await axios(`http://65.108.77.50:3031/update_poll_title?id=648c0c59404fcc93fa6510a4&title=${editTitle.title}`)
+    async editPoll({ commit }, editid) {
+        console.log(editid.id);
+        // const response = await axios(`http://65.108.77.50:3031/update_poll_title?id=648c0c59404fcc93fa6510a4&title=${editTitle.title}`)
+        const response = await axios.put(`http://65.108.77.50:3031/update_poll_title?id=${editid.id}&title=${editid.title}`)
+        alert("Edit Title Successfull")
         commit("setDetails", response.data);
-        console.log("Edit Poll", response.data)
+        console.log("Edit Poll", response.data);
     },
+    async addNewOption({ commit }, optionid){
+        console.log(optionid.id4);
+        const res = await axios.post(`http://65.108.77.50:3031/add_new_option?id=${optionid.id4}&option_text=${optionid.option}`)
+        alert("Edit Option successfull")
+        commit("Set_Option", res.data);
+        console.log("Edit option", res.data);
+    }
 
 
 };
@@ -50,6 +60,10 @@ const mutations = {
     setDetails: (state, users) => {
         console.log('Mutation calling:', users);
         (state.users = users)
+    },
+    Set_Option:(state,users) => {
+        console.log('Editing  option:', users);
+       (state.users = users)
     },
     snythin: (state,deleteuser)=>{
         console.log("delete",deleteuser);

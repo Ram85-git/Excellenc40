@@ -29,11 +29,37 @@
                         </div>
                     </td>
                     <td><i class="fa-solid fa-trash" v-on:click.prevent="deleteusers(option._id)"></i></td>
-                   <td><i class="fa-regular fa-pen-to-square" v-on:click.prevent="editItem()"></i></td>
-
+                    <td><i class="fa-regular fa-pen-to-square" v-on:click.prevent="editItem(option._id, option.title)"></i></td>
+                    
                 </tr>
             </tbody>
         </v-table>
+        <v-dialog v-model="dialogVisible" class="dig">
+            <v-card class="card">
+                <v-card-title>
+                    <span class="headline">Edit Poll</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-form ref="formDialog">
+                        <v-text-field v-model="title" label="Title" required></v-text-field>
+                        <v-text-field v-model="option" label="Add option" hide-details="auto"></v-text-field>
+                        <!-- <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select> -->
+                        <!-- <li>{{ dialogTitle }}</li>
+                           <li>{{dialogSelect  }}</li> -->
+
+
+                    </v-form>
+                </v-card-text>
+                <v-card-actions>
+
+                    <v-btn type="button"  label="Title"  color="blue" text v-on:click.prevent="submit(); ">Submit</v-btn>
+                    <v-btn type="button"  label="Option"  color="blue" text v-on:click.prevent="addDeta(option);">Add Option</v-btn>
+                    <!-- <v-btn color="blue" text @click="EditPoll">Edit Poll</v-btn> -->
+                    <!-- <v-btn color="blue" text @click="DeletePoll">Delete Poll</v-btn> -->
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
         <!-- <div>
             <button @click="showForm = true">Edit</button>
         </div>
@@ -61,6 +87,15 @@ export default {
             options: [],
             tableData: [],
             showForm: false,
+            dialogVisible: false,
+            submittedTitle: '',
+            id1:"",
+            // text: '',
+            id2: '',
+            option: '',
+           
+           
+
         };
     },
 
@@ -69,7 +104,17 @@ export default {
     },
 
     methods: {
-        ...mapActions([ 'deleteusers', 'editusers']),
+        editItem(id,id4,title,option) {
+            this.id1=id;
+           this.id2=id4;
+            this.title=title;
+            this.option=option;
+            // this.text=text;
+            this.dialogVisible = true;
+        },
+        // ...mapActions(['deleteusers', 'editusers', 'editPoll' ]),
+        ...mapActions(['deleteusers',  'editPoll', 'addNewOption' ]),
+        
         async fetchData() {
             try {
                 const response = await axios.get('http://65.108.77.50:3031/list_polls');
@@ -81,13 +126,36 @@ export default {
                 console.error(error);
             }
         },
-        saveForm() {
+        // saveForm() {
 
-            this.showForm = false;
+            //     this.showForm = false;
+            // },
+            // cancelForm() {
+                
+                //     this.showForm = false;
+        // },
+        submit() {
+            let editid={
+                id:this.id1,
+                title:this.title,
+               
+            }   
+            this.editPoll(editid);
+
+            // this.title = this.submittedTitle;
+            this.dialogVisible = false;
+            
         },
-        cancelForm() {
+        addDeta() {
+            console.log(this.option);
+            let optionid ={
+                id4:this.id2,
+                option:this.option,
+               
+            }
+            this.addNewOption(null, optionid);
+            
 
-            this.showForm = false;
         },
         
         deletePoll(pollid) {
@@ -99,9 +167,22 @@ export default {
 </script>
 
 <style scoped>
+
+.mainPoll{
+    background-image: url('https://uploads-ssl.webflow.com/5a9ee6416e90d20001b20038/62ee03241cef28eaca144d50_Rectangle%201%20(40).svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 1400px;
+    margin: auto;
+    height: 800px;
+}
+.dig {
+    width: 500px;
+}
+
 .v-table {
     border: 2px solid;
-    width: 400px;
+    width: 600px;
     margin: auto;
 
 }
@@ -113,17 +194,19 @@ td {
     padding-left: 20px;
     color: black;
 }
-.popform{
+
+.popform {
     border: 1px solid;
-  margin: auto;
-  width: 500px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgb(136, 125, 125);
-  padding: 20px;
-  z-index: 9999;;
+    margin: auto;
+    width: 500px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(136, 125, 125);
+    padding: 20px;
+    z-index: 9999;
     
+
 }
 </style>
