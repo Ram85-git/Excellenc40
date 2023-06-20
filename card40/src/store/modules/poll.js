@@ -22,12 +22,12 @@ const actions = {
         console.log("Poll list ", data);
 
     },
-    // async deletePoll({ commit }, id) {
-    //     const res = await axios.post(`http://65.108.77.50:3031/delete_poll?id=${id}`);
-    //     // commit("Delete_data", res.data)
-    //     commit("Delete_Poll", id);
-    //     console.log("Delete_Poll ", res);
-    // },
+    async deletePoll({ commit }, id) {
+        const res = await axios.post(`http://65.108.77.50:3031/delete_poll?id=${id}`);
+        // commit("Delete_data", res.data)
+        commit("Delete_Poll", id);
+        console.log("Delete_Poll ", res);
+    },
 
     // const edit= await axios.post(`http://65.108.77.50:3031/update_poll_title?id=648b101b404fcc93fa650efb&title=${payload.title}`)
     async deleteusers({ commit }, pollid) {
@@ -37,6 +37,23 @@ const actions = {
         commit("snythin", deleuser);
     },
 
+    async deleteOptions({commit }, deleteid){
+       
+        const del = await axios.delete(`http://65.108.77.50:3031/delete_poll_option?id=${deleteid.id}&option_text=${deleteid.text}`);
+
+        alert("Delete option success")
+        commit("snythin1", del)
+
+
+    },
+    
+    async addNewOption({ commit }, optionid){
+        console.log(optionid.id);
+        const res = await axios.post(`http://65.108.77.50:3031/add_new_option?id=${optionid.id}&option_text=${optionid.option}`)
+        alert("Edit Option successfull")
+        commit("Set_Option", res.data);
+        console.log("Edit option", res.data);
+    },
 
     async editPoll({ commit }, editid) {
         console.log(editid.id);
@@ -46,13 +63,6 @@ const actions = {
         commit("setDetails", response.data);
         console.log("Edit Poll", response.data);
     },
-    async addNewOption({ commit }, optionid){
-        console.log(optionid.id4);
-        const res = await axios.post(`http://65.108.77.50:3031/add_new_option?id=${optionid.id4}&option_text=${optionid.option}`)
-        alert("Edit Option successfull")
-        commit("Set_Option", res.data);
-        console.log("Edit option", res.data);
-    }
 
 
 };
@@ -65,7 +75,7 @@ const mutations = {
         console.log('Editing  option:', users);
        (state.users = users)
     },
-    snythin: (state,deleteuser)=>{
+    snythin: (state,deleteuser)=> {
         console.log("delete",deleteuser);
         (state.deleteuser=deleteuser)
     }

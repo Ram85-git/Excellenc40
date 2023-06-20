@@ -5,7 +5,7 @@
           <v-form ref="form" @submit.prevent="login">
             <v-text-field v-model="username" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
             <v-text-field v-model="password" label="Password" type="password" outlined></v-text-field>
-            <v-text-field v-model="role" label="role" type="text" outlined></v-text-field>
+            <!-- <v-text-field v-model="role" label="role" type="text" outlined></v-text-field> -->
             <div class="d-flex flex-column">
               <v-btn color="success" type="submit" class="mt-4" block >
                 login
@@ -36,7 +36,7 @@ export default {
       showForm: false, 
       username:'',
       email:'',
-      role:'',
+      // role:'',
     };
   },
   methods: {
@@ -48,7 +48,7 @@ export default {
         
         username: this.username,
         password: this.password,
-        role: this.role
+        // role: this.role
       });
       // this.loginDetails('main');
       // router.push('/mainview');

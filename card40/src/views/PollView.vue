@@ -12,7 +12,7 @@
                         Option
                     </th>
                     <th class="text-left">
-                        Delete
+                        Delete Poll
                     </th>
                     <th class="text-left">
                         Edit
@@ -23,10 +23,13 @@
                 <tr v-for="option in tableData" :key="option._id">
                     <td>{{ option.title }}</td>
                     <!-- <td>{{ option.select }}</td> -->
-                    <td>
+                    <td >
                         <div v-for="(item, index) in option.options" :key="index">
-                            {{ item.option }}
+                            {{ item.option }} {{ item._id }}
+                            <i class="fa-solid fa-trash" v-on:click.prevent="deleteOption(option._id, item.option)"></i>
+                           
                         </div>
+                        <i class="fa-sharp fa-solid fa-plus" id="add" v-on:click.prevent="AddOptions(option._id, option.options)"></i>
                     </td>
                     <td><i class="fa-solid fa-trash" v-on:click.prevent="deleteusers(option._id)"></i></td>
                     <td><i class="fa-regular fa-pen-to-square" v-on:click.prevent="editItem(option._id, option.title)"></i></td>
@@ -47,32 +50,40 @@
                         <!-- <li>{{ dialogTitle }}</li>
                            <li>{{dialogSelect  }}</li> -->
 
-
+  
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
 
                     <v-btn type="button"  label="Title"  color="blue" text v-on:click.prevent="submit(); ">Submit</v-btn>
-                    <v-btn type="button"  label="Option"  color="blue" text v-on:click.prevent="addDeta(option);">Add Option</v-btn>
+                    <!-- <v-btn type="button"  label="Option"  color="blue" text v-on:click.prevent="addDeta(option);">Add Option</v-btn> -->
+                    <!-- <v-btn color="blue" text @click="EditPoll">Edit Poll</v-btn> -->
+                    <!-- <v-btn color="blue" text @click="DeletePoll">Delete Poll</v-btn> -->
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialogVisible1" class="dig">
+            <v-card class="card">
+                <v-card-title>
+                    <span class="headline">App options</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-form ref="formDialog">
+                        
+                        <v-text-field v-model="option" label="Add option" hide-details="auto"></v-text-field>
+                    </v-form>
+                </v-card-text>
+                <v-card-actions>
+
+                    <v-btn type="button"  label="Title"  color="blue" text v-on:click.prevent="AddOpt(); ">Submit</v-btn>
+                    <!-- <v-btn type="button"  label="Option"  color="blue" text v-on:click.prevent="DeleteOption();">Delete Opton</v-btn> -->
                     <!-- <v-btn color="blue" text @click="EditPoll">Edit Poll</v-btn> -->
                     <!-- <v-btn color="blue" text @click="DeletePoll">Delete Poll</v-btn> -->
                 </v-card-actions>
             </v-card>
         </v-dialog>
 
-        <!-- <div>
-            <button @click="showForm = true">Edit</button>
-        </div>
-        <div class="popform" v-if="showForm">
-            <v-form ref="formDialog">
-                <v-text-field v-model="dialogTitle" label="Title" required></v-text-field>
-                <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select>
-
-            </v-form>
-            <button @click="saveForm">Save</button>
-            <button @click="cancelForm">Cancel</button>
-        </div> -->
-
+       
 
     </div>
 </template>
@@ -81,6 +92,15 @@ import { mapActions } from 'vuex';
 import axios from 'axios';
 export default {
     name: 'Po-ll',
+   
+    watch: {
+      tableData: {
+        deep: true,
+        handler() {
+            this.updateData();
+        }
+      }
+    },
     data() {
         return {
             title: '',
@@ -88,11 +108,13 @@ export default {
             tableData: [],
             showForm: false,
             dialogVisible: false,
+            dialogVisible1: false,
             submittedTitle: '',
             id1:"",
             // text: '',
-            id2: '',
+            // id2: '',
             option: '',
+            text: '',
            
            
 
@@ -102,18 +124,34 @@ export default {
     mounted() {
         this.fetchData();
     },
+    // onUpdated() {
+      
+    
+    // },
+
 
     methods: {
-        editItem(id,id4,title,option) {
+
+        updateData(){
+          this.fetchData();
+
+        },
+
+        editItem(id,title) {
             this.id1=id;
-           this.id2=id4;
+
             this.title=title;
-            this.option=option;
-            // this.text=text;
+           
             this.dialogVisible = true;
         },
+        AddOptions(id,option){
+            this.id1=id;
+            this.option=option;
+            this.dialogVisible1 = true;
+
+        },
         // ...mapActions(['deleteusers', 'editusers', 'editPoll' ]),
-        ...mapActions(['deleteusers',  'editPoll', 'addNewOption' ]),
+        ...mapActions(['deleteusers',  'editPoll', 'addNewOption','deleteOptions' ]),
         
         async fetchData() {
             try {
@@ -146,22 +184,35 @@ export default {
             this.dialogVisible = false;
             
         },
-        addDeta() {
-            console.log(this.option);
-            let optionid ={
-                id4:this.id2,
-                option:this.option,
-               
-            }
-            this.addNewOption(null, optionid);
-            
 
+        AddOpt() {
+            console.log(this.option);
+
+            let optionid = {
+                id:this.id1,
+                option:this.option  // text:this.text
+            }
+            console.log("option data", optionid);
+            this.dialogVisible1 = false;
+            this.addNewOption(optionid);
         },
         
         deletePoll(pollid) {
             // console.log(pollid)
             this.deleteusers(pollid);
         },
+
+        deleteOption(id, text) {
+
+            this.id1=id;
+            this.text=text;
+            let deleteid = {
+                id:this.id1,
+                text:this.text,
+            }
+            //  console.log(optid)
+            this.deleteOptions(deleteid);
+        }
     }
 };
 </script>
@@ -179,6 +230,16 @@ export default {
 .dig {
     width: 500px;
 }
+#add{
+    height: 30px;
+    width: 20px;
+    background-color: green;
+    margin-left: 150px;
+}
+/* 
+#flexit{
+    display: flex;
+} */
 
 .v-table {
     border: 2px solid;
