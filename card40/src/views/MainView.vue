@@ -22,8 +22,7 @@
                         <v-text-field v-model="dialogTitle" label="Title" required></v-text-field>
                         <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select>
                         <v-text-field v-model="dialogSelect"  label="Add option" hide-details="auto"></v-text-field>
-                        <!-- <li>{{ dialogTitle }}</li>
-                           <li>{{dialogSelect  }}</li> -->
+                       
 
                     </v-form>
                 </v-card-text>
@@ -31,29 +30,11 @@
 
                     <v-btn type="button" color="blue" text v-on:click.prevent="addPollFromDialog();
                     submit();">Add New Poll</v-btn>
-                    <!-- <v-btn color="blue" text @click="EditPoll">Edit Poll</v-btn> -->
-                    <!-- <v-btn color="blue" text @click="DeletePoll">Delete Poll</v-btn> -->
+                  
                 </v-card-actions>
             </v-card>
         </v-dialog>
-        <!-- <table> -->
-        <!-- <thead> -->
-        <!-- <tr>
-                <th>Title</th>
-                <th>Option</th>
-                <th>Delete</th>
-                <th>Update</th>
-            </tr> -->
-        <!-- </thead> -->
-        <!-- <tbody> -->
-        <!-- <tr v-for="item in tableData" :key="item" id="item">
-                <td>{{ item.title }}</td>
-                <td>{{ item.select }}</td>
-                <td><i class="fa-solid fa-trash" v-on:click.prevent="deleteItem()"></i></td>
-                <td><i class="fa-regular fa-pen-to-square" v-on:click.prevent="editItem()"></i></td>
-            </tr> -->
-        <!-- </tbody> -->
-        <!-- </table> -->
+        
         <v-table>
             <thead>
                 <tr>
@@ -141,22 +122,7 @@ export default {
             })
             this.dialogVisible = false;
         },
-        // deleteItem() {
-        //     this.deletePoll({
-        //         title: this.title,
-        //         select: this.select
-
-        //     })
-
-        // },
-        // editItem() {
-        //     this.editPoll({
-        //         title: this.title,
-        //         // select: this.select
-
-        //     })
-        // },
-
+       
 
 
         submit: function () {
@@ -169,22 +135,7 @@ export default {
             this.dialogTitle = '';
             this.dialogSelect = '';
         }
-        // const newRow = {
-        //     // const newRow = {
-        //     title: this.dialogTitle,
-        //     option: this.dialogSelect
-        // };
-        // this.tableData.push(newRow);
-
-        // // Reset the input fields
-        // this.dialogTitle = '';
-        // this.dialogSelect = null;
-
-        // // Close the dialog
-        // this.dialogVisible = false;
-
-
-        // }
+       
     },
     computed: mapGetters(["allPolls"]),
 

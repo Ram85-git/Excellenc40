@@ -42,8 +42,22 @@ export default {
   methods: {
     // ...mapActions('auth' , ["loginDetails"]),
     ...mapActions( ["loginDetails"]),
-    login(){
+    login() {
+          
+      const userStatus = JSON.parse(localStorage.getItem("userStatus"));
+  console.log("68called",userStatus);
+  // console.log(localStorage.getItem());
+  // if (to.path === '/mainview' && !store.state.isAuthenticated ) {
+    // if (to.path === '/mainview' ) {
+    // alert("login first")
+    // router.push('/components/LoginForm')""
+
+    if(userStatus.error == 0 && userStatus.token !== null ){
       this.$router.push('/mainview');
+
+    }
+      
+      
       this.loginDetails({
         
         username: this.username,
@@ -74,6 +88,14 @@ export default {
     width: 600px;
     margin: auto;
     border: 2px solid;
+}
+.pop14{
+  background-image: url('https://images.unsplash.com/photo-1639493115941-b269818abfcd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80');
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width: 1400px;
+  margin: auto;
+  height: 800px;
 }
 
 

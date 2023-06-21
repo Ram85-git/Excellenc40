@@ -15,7 +15,7 @@
                         Delete Poll
                     </th>
                     <th class="text-left">
-                        Edit
+                        Edit Title
                     </th>
                 </tr>
             </thead>
@@ -45,7 +45,7 @@
                 <v-card-text>
                     <v-form ref="formDialog">
                         <v-text-field v-model="title" label="Title" required></v-text-field>
-                        <v-text-field v-model="option" label="Add option" hide-details="auto"></v-text-field>
+                        <!-- <v-text-field v-model="option" label="Add option" hide-details="auto"></v-text-field> -->
                         <!-- <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select> -->
                         <!-- <li>{{ dialogTitle }}</li>
                            <li>{{dialogSelect  }}</li> -->
@@ -91,8 +91,7 @@
 import { mapActions } from 'vuex';
 import axios from 'axios';
 export default {
-    name: 'Po-ll',
-   
+    name: 'Po-ll', 
     watch: {
       tableData: {
         deep: true,

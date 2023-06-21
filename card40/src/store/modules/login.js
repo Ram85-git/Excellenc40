@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import router from '../../router'
 
 const state = {
 
@@ -23,6 +24,10 @@ const actions = {
         commit("Set_login_status", res.data);
         console.log("Data login success  ", res.data);
         // this.$router.push('/mainview')
+        // localStorage.setItem("userStatus", res.data);
+        localStorage.setItem("userStatus", JSON.stringify(res.data));
+        
+
     },
     
 

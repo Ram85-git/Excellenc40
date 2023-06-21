@@ -37,7 +37,8 @@ export default {
     return {
       username: '',
       password: '',
-      role: ''
+      role: '',
+      // admin:'',
     }
   },
   
@@ -45,6 +46,8 @@ export default {
 
     ...mapActions(["adduser1"]),
     signIn() {
+      
+      this.$router.push('/components/LoginForm')
       this.adduser1({
         username: this.username,
         password: this.password,
