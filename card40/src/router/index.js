@@ -5,6 +5,7 @@ import SignupForm from '../components/SignupForm.vue'
 import LoginForm from '../components/LoginForm.vue'
 // import MainView from '../views/MainView.vue'
 import PollView from '../views/PollView.vue'
+import User from '../components/User.vue'
 // import store from '../store/index'
 // import { IS_USER_AUTHENTICATE_GETTER } from '../store/index'
 const routes = [
@@ -20,6 +21,14 @@ const routes = [
     component: SignupForm,
     // meta: { auth: false },
   },
+  {
+    path: '/components/User',
+    name: 'user',
+    component: User,
+    meta: { auth : true },
+    
+  },
+
   {
     path: '/components/LoginForm',
     name: 'Login',

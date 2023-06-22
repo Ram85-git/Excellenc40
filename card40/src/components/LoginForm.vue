@@ -27,6 +27,7 @@
 <script>
 
 
+// import router from '@/router';
 import { mapActions, } from 'vuex';
 // import router from '../router/index'
 
@@ -36,8 +37,10 @@ export default {
     return {
       showForm: false, 
       username:'',
-      email:'',
+      password:'',
+      // user:''
       // role:'',
+      // admin:''
     };
   },
   methods: {
@@ -45,26 +48,23 @@ export default {
     ...mapActions( ["loginDetails"]),
 
     login() {
-      
-      // this.$router.push('/pollview')
+         
+      // if(role==admin){
+      //   router.push('/pollview')
+      // }
+      // else {
+      //   router.push('//components/User')
+      // }
       this.loginDetails({
           username: this.username,
         password: this.password,
-        // role: this.role
+        
       });
       // this.loginDetails('main');
       // router.push('/mainview');
-      
-      
-
     }
       
     },
-
-    
-
-  
-
 };
 </script>
 

@@ -26,7 +26,16 @@ const actions = {
         router.push({path: '/pollview'})
         // localStorage.setItem("userStatus", res.data);
         localStorage.setItem("status", res.data.token);
-        
+        if(loginCredential.username=="admin" && loginCredential.password=="password"){
+
+            router.push({path: '/pollview'});
+        }
+        else {
+            router.push('/components/User')
+        }
+
+
+
 
     },
     
