@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import router from '../../router'
+import router from '../../router'
 
 const state = {
 
@@ -22,10 +22,10 @@ const actions = {
 
         const res = await axios.post(`http://65.108.77.50:3031/login?username=${loginCredential.username}&password=${loginCredential.password}`);
         commit("Set_login_status", res.data);
-        console.log("Data login success  ", res.data);
-        // this.$router.push('/mainview')
+        console.log("Data login success  ", res.data.token);
+        router.push({path: '/pollview'})
         // localStorage.setItem("userStatus", res.data);
-        localStorage.setItem("userStatus", JSON.stringify(res.data));
+        localStorage.setItem("status", res.data.token);
         
 
     },

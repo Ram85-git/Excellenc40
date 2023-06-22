@@ -1,8 +1,8 @@
-<template>
-    <h1> Poll Management System</h1>
+<!-- <template> -->
+    <!-- <h1> Poll Management System</h1> -->
 
     <!-- <button @click="openPopupForm">Open Form</button> -->
-    <div class="main">
+    <!-- <div class="main">
 
 
         <div class="fffff">
@@ -21,8 +21,8 @@
                     <v-form ref="formDialog">
                         <v-text-field v-model="dialogTitle" label="Title" required></v-text-field>
                         <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select>
-                        <v-text-field v-model="dialogSelect"  label="Add option" hide-details="auto"></v-text-field>
-                       
+                        <v-text-field v-model="dialogSelect" label="Add option" hide-details="auto"></v-text-field>
+
 
                     </v-form>
                 </v-card-text>
@@ -30,12 +30,12 @@
 
                     <v-btn type="button" color="blue" text v-on:click.prevent="addPollFromDialog();
                     submit();">Add New Poll</v-btn>
-                  
+
                 </v-card-actions>
             </v-card>
-        </v-dialog>
-        
-        <v-table>
+        </v-dialog> -->
+
+        <!-- <v-table>
             <thead>
                 <tr>
                     <th class="text-left">
@@ -55,100 +55,101 @@
             <tbody>
                 <tr v-for="item in tableData" :key="item" id="item">
                     <td>{{ item.title }}</td>
-                    <td>{{ item.select }}</td>
-                    <!-- <td><i class="fa-solid fa-trash" v-on:click.prevent="deleteItem()"></i></td>
+                    <td>{{ item.select }}</td> -->
+        <!-- <td><i class="fa-solid fa-trash" v-on:click.prevent="deleteItem()"></i></td>
                     <td><i class="fa-regular fa-pen-to-square" v-on:click.prevent="editItem()"></i></td> -->
-
+        <!-- 
                 </tr>
             </tbody>
-        </v-table>
+        </v-table> -->
 
-    </div>
+    <!-- </div> -->
 
-    <PollCards />
-</template>
+    <!-- <PollCards /> -->
+<!-- </template> -->
 
-<script>
-import { mapGetters, mapActions } from 'vuex';
+<!-- <script> -->
+// import { mapGetters, mapActions } from 'vuex';
 // import { mapState } from 'vuex';
-import PollCards from '@/components/PollCards.vue';
+// import PollCards from '@/components/PollCards.vue';
 // import axios from 'axios';  
-export default {
-    name: "MainView",
-    components: {
-        PollCards
+// export default {
+//     name: "MainView",
+//     components: {
+//         PollCards
 
-    },
+//     },
 
-    data() {
-        return {
-            title: "",
-            select: "",
-            items: [
-                'val 1',
-                'val 2',
-                'val 3',
-                'val 4',
-                'val 5',
-                'val 6',
-            ],
-            dialogVisible: false,
+//     data() {
+//         return {
+//             title: "",
+//             select: "",
+//             items: [
+//                 'val 1',
+//                 'val 2',
+//                 'val 3',
+//                 'val 4',
+//                 'val 5',
+//                 'val 6',
+//             ],
+//             dialogVisible: false,
 
-            dialogTitle: "",
-            dialogSelect: null,
-            tableData: [],
+//             dialogTitle: "",
+//             dialogSelect: null,
+//             tableData: [],
 
 
 
-        };
-    },
-    methods: {
-        openDialog() {
-            this.dialogVisible = true;
-        },
-        cancelDialog() {
-            this.dialogVisible = false;
-        },
+//         };
+//     },
+//     methods: {
+//         openDialog() {
+//             this.dialogVisible = true;
+//         },
+//         cancelDialog() {
+//             this.dialogVisible = false;
+//         },
 
         // ...mapActions(['addPoll', 'deletePoll', 'editPoll', 'fetchData']),
-        ...mapActions(['addPoll', 'fetchData' ]),
-       
-        addPollFromDialog() {
-            this.$router.push('/mainview');
-            this.$router.push('/pollview')
-            this.addPoll({
-                title: this.dialogTitle,
-                select: this.dialogSelect
-            })
-            this.dialogVisible = false;
-        },
-       
+//         ...mapActions(['addPoll', 'fetchData']),
 
-
-        submit: function () {
-            console.log("Value added", this.dialogTitle, this.dialogSelect);
-            this.tableData.push({
-                'title': this.dialogTitle,
-                'select': this.dialogSelect
-
-            })
-            this.dialogTitle = '';
-            this.dialogSelect = '';
-        }
-       
-    },
-    computed: mapGetters(["allPolls"]),
+//         addPollFromDialog() {
+//             this.$router.push('/mainview');
+//             this.$router.push('/pollview')
+//             this.addPoll({
+//                 title: this.dialogTitle,
+//                 select: this.dialogSelect
+//             })
+//             this.dialogVisible = false;
+//         },
 
 
 
+//         submit: function () {
+//             console.log("Value added", this.dialogTitle, this.dialogSelect);
+//             this.tableData.push({
+//                 'title': this.dialogTitle,
+//                 'select': this.dialogSelect
 
-};
-</script>
-<style scoped>
-.dig{
+//             })
+//             this.dialogTitle = '';
+//             this.dialogSelect = '';
+//         }
+
+//     },
+//     computed: mapGetters(["allPolls"]),
+
+
+
+
+// };
+<!-- </script> -->
+<!-- <style scoped>
+.dig {
     margin: auto;
     text-align: center;
 }
+
 .v-table {
     border: 2px solid;
     width: 400px;
@@ -218,4 +219,4 @@ button {
     margin-right: 12px;
 
 }
-</style>
+</style> -->

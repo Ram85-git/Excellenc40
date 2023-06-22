@@ -2,12 +2,12 @@
   <div class="pop14" >
     
 
-          <v-form ref="form" @submit.prevent="login">
-            <v-text-field v-model="username" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+          <v-form ref="form" >
+            <v-text-field v-model="username" :counter="10" label="Name" required></v-text-field>
             <v-text-field v-model="password" label="Password" type="password" outlined></v-text-field>
             <!-- <v-text-field v-model="role" label="role" type="text" outlined></v-text-field> -->
             <div class="d-flex flex-column">
-              <v-btn color="success" type="submit" class="mt-4" block >
+              <v-btn color="success" @click="login" class="mt-4"  >
                 login
               </v-btn>
 
@@ -28,7 +28,8 @@
 
 
 import { mapActions, } from 'vuex';
-// import { router } from '../router';
+// import router from '../router/index'
+
 export default {
   name:`LoginForm`,
   data() {
@@ -42,31 +43,19 @@ export default {
   methods: {
     // ...mapActions('auth' , ["loginDetails"]),
     ...mapActions( ["loginDetails"]),
+
     login() {
-          
-      const userStatus = JSON.parse(localStorage.getItem("userStatus"));
-  console.log("68called",userStatus);
-  // console.log(localStorage.getItem());
-  // if (to.path === '/mainview' && !store.state.isAuthenticated ) {
-    // if (to.path === '/mainview' ) {
-    // alert("login first")
-    // router.push('/components/LoginForm')""
-
-    if(userStatus.error == 0 && userStatus.token !== null ){
-      this.$router.push('/mainview');
-
-    }
       
-      
+      // this.$router.push('/pollview')
       this.loginDetails({
-        
-        username: this.username,
+          username: this.username,
         password: this.password,
         // role: this.role
       });
       // this.loginDetails('main');
       // router.push('/mainview');
-
+      
+      
 
     }
       

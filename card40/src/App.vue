@@ -6,8 +6,10 @@
         <div id="HA">
          <router-link to="/">Home</router-link> 
          <router-link to="/about">About</router-link>
-         <router-link to="/mainview">Main </router-link>
+         <!-- <router-link to="/mainview">Main </router-link> -->
          <router-link to="/pollview">Poll view</router-link>
+         <router-link to="/components/LoginForm">login</router-link>
+         <router-link to="/components/SignupForm">sign</router-link>
         </div> 
         </div>
       <img>

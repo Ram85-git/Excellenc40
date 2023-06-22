@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import SignupForm from '../components/SignupForm.vue'
 import LoginForm from '../components/LoginForm.vue'
-import MainView from '../views/MainView.vue'
+// import MainView from '../views/MainView.vue'
 import PollView from '../views/PollView.vue'
 // import store from '../store/index'
 // import { IS_USER_AUTHENTICATE_GETTER } from '../store/index'
@@ -16,37 +16,37 @@ const routes = [
 
   {
     path: '/components/SignupForm',
-    name:'SignUp',
+    name: 'SignUp',
     component: SignupForm,
-    meta: { requiresAuth: false },
+    // meta: { auth: false },
   },
   {
     path: '/components/LoginForm',
-    name:'Login',
+    name: 'Login',
     component: LoginForm,
-    meta: { requiresAuth: false },
+    // meta: { auth: false },
 
   },
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
-  {
-    path: '/mainview',
-    name: 'main',
-    component: MainView,
-    meta: { auth: true },
-  },
+
+  // {
+  //   path: '/mainview',
+  //   name: 'main',
+  //   component: MainView,
+  //   meta: { auth: true },
+  // },
+
   {
     path: '/pollview',
     name: 'poll',
-    component: PollView
+    component: PollView,
+    meta: { auth : true },
   }
-  
+
 ]
 
 const router = createRouter({
@@ -62,11 +62,55 @@ const router = createRouter({
 //       next('/login');
 //     }
 //  });
-router.beforeEach((to, from) => {
-  console.log(to);
-  console.log(from);
-  const userStatus = JSON.parse(localStorage.getItem("userStatus"));
-  console.log(userStatus.token);
+router.beforeEach((to) => {
+  let open = localStorage.getItem("status");
+  console.log(open);
+  // console.log(to.path);
+  // console.log(from);
+  if(to.meta.auth && !open){
+
+    return (
+      {name:'home'}
+    )
+  }
+
+});
+  
+  // const storedToken = JSON.parse(localStorage.getItem("userStatus"));
+  // console.log("68called", storedToken);
+  
+  // // const storedToken = localStorage.getItem('authToken'); // Get the stored token from local storage
+  // const logoutToken = 'YOUR_LOGOUT_TOKEN'; // The token you want to compare for logging out
+  // const isAuthenticated = storedToken !== null && storedToken !== logoutToken;
+
+  // if (to.meta.requiresAuth && !isAuthenticated) {
+  //   // Redirect to the login page if not authenticated
+  //   next('/login');
+  // } else {
+  //   // Allow the navigation to proceed
+  //   next();
+  // }
+  // const userStatus = JSON.parse(localStorage.getItem("userStatus"));
+  // if(from.path == '/pollview'  ){
+  //   next('/pollview');
+
+  // }
+  // else {
+
+  //   next();
+  // }
+
+
+
+
+
+
+
+
+
+  // console.log(userStatus.token);
+  // console.log("70called",to,from);
+
   // if(token==admin){
   //   router.push('/mainview')
   // }
@@ -76,9 +120,9 @@ router.beforeEach((to, from) => {
   //   if (to.path === '/mainview' ) {
   //   alert("login first")
   //   router.push('/components/LoginForm')
-  
+
   // } 
- 
+
   // else {
   //   next();
   //   async loginDetails({commit}, loginCredential) {
@@ -90,8 +134,8 @@ router.beforeEach((to, from) => {
   // },
 
   // }
-  
-});
+
+
 
 // function checkIfUserIsAuthenticated() {
 //   // Access the isAuthenticated state from your Vuex store
