@@ -19,7 +19,7 @@
 </template>
 
 <script>
-
+import { mapActions } from 'vuex';
 // import LoginForm from '@/components/LoginForm.vue';
 export default {
   name: 'HomeView',
@@ -28,12 +28,14 @@ export default {
     
   },
 
-  // mounted(){
-  //   let user = localStorage.getItem('user-info');
-  //   if(!user){
-  //     this.$router.push({name:'SignUp'})
-  //   }
-  // }
+  methods: {
+    ...mapActions(["getUsers"])
+  },
+
+  mounted(){
+    this.getUsers();
+    // console.log(this.getUsers(), "getusers is mounted");
+  }
 
 
   

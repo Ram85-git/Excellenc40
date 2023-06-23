@@ -303,6 +303,7 @@ export default {
 .logout{
     border: 1px solid;
     margin-left: 800px;
+    margin-top: -64px;
 }
 .mainPoll {
     background-image: url('https://uploads-ssl.webflow.com/5a9ee6416e90d20001b20038/62ee03241cef28eaca144d50_Rectangle%201%20(40).svg');

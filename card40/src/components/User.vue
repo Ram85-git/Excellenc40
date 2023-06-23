@@ -1,10 +1,10 @@
 <template>
-<div class="mainPoll">
-    <h1>All Polls</h1>
-    <v-btn  class="logout" type="button" @click="logOut()">
-                Log Out
-            </v-btn>
-    <v-table>
+    <div class="mainPoll">
+        <h1>All Polls</h1>
+        <v-btn class="logout" type="button" @click="logOut()">
+            Log Out
+        </v-btn>
+        <v-table>
             <thead>
                 <tr>
                     <th class="text-left">
@@ -16,7 +16,7 @@
                     <th class="text-left">
                         Vote
                     </th>
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -26,16 +26,16 @@
                     <td>
                         <div v-for="(item, index) in option.options" :key="index">
                             {{ item.option }} {{ item._id }}
-                           
+
 
                         </div>
-                       
                     </td>
-                   
+                    <td><i class="fa-solid fa-check-to-slot"></i></td>
+
                 </tr>
             </tbody>
         </v-table>
-</div>
+    </div>
 </template>
 
 <script>
@@ -43,7 +43,7 @@ import { mapActions, } from 'vuex';
 import axios from 'axios';
 import router from '@/router';
 export default {
-    name:`User`,
+    name: `User`,
     data() {
         return {
             options: [],
@@ -59,14 +59,14 @@ export default {
         this.fetchData();
     },
     methods: {
-        logOut(){
+        logOut() {
             localStorage.removeItem('status');
             router.push('/')
 
         },
 
 
-        ...mapActions([ 'fetchData']),
+        ...mapActions(['fetchData']),
 
         async fetchData() {
             try {
@@ -95,9 +95,11 @@ export default {
     margin: auto;
     height: 800px;
 }
+
 .logout {
     border: 1px solid;
     margin-left: 800px;
+    margin-top: -64px;
 
 }
 
@@ -115,8 +117,4 @@ td {
     padding-left: 20px;
     color: black;
 }
-
-
-
-
 </style>

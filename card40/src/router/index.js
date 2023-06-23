@@ -19,7 +19,7 @@ const routes = [
     path: '/components/SignupForm',
     name: 'SignUp',
     component: SignupForm,
-    // meta: { auth: false },
+    // meta: { auth: true },
   },
   {
     path: '/components/User',
@@ -33,7 +33,7 @@ const routes = [
     path: '/components/LoginForm',
     name: 'Login',
     component: LoginForm,
-    // meta: { auth: false },
+    // meta: { auth: true },
 
   },
   {
@@ -63,27 +63,23 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   // console.log(to);
-//   if (to.meta.auth && 
-//     !store.getters[`auth/${IS_USER_AUTHENTICATE_GETTER}`]
-//     ) {
-//       next('/login');
-//     }
-//  });
 router.beforeEach((to) => {
   let open = localStorage.getItem("status");
   console.log(open);
   // console.log(to.path);
   // console.log(from);
   if(to.meta.auth && !open){
-
+     
     return (
       {name:'home'}
     )
   }
 
 });
+
+// if(from.path == '/pollview'  ){
+  //   next('/pollview');
+
   
   // const storedToken = JSON.parse(localStorage.getItem("userStatus"));
   // console.log("68called", storedToken);
@@ -108,14 +104,6 @@ router.beforeEach((to) => {
 
   //   next();
   // }
-
-
-
-
-
-
-
-
 
   // console.log(userStatus.token);
   // console.log("70called",to,from);
