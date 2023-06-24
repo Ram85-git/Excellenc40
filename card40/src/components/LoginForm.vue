@@ -3,7 +3,7 @@
 
 
     <v-form ref="form">
-      <v-text-field v-model="username" label="Username" required ></v-text-field>
+      <v-text-field v-model="username" label="Username" required></v-text-field>
       <v-text-field v-model="password" label="Password" type="password" outlined></v-text-field>
       <!-- <v-text-field v-model="role" label="role" type="text" outlined></v-text-field> -->
       <div class="d-flex flex-column">
@@ -26,8 +26,8 @@
 <script>
 
 
-import router from '@/router';
-import { mapActions , mapGetters } from 'vuex';
+// import router from '@/router';
+import { mapGetters } from 'vuex';
 // import router from '../router/index'
 
 export default {
@@ -44,34 +44,15 @@ export default {
   },
   computed: mapGetters(["allUsers"]),
   methods: {
-    ...mapActions(["loginDetails"]),
-
-    login() {
-
-
-      this.loginDetails({
-        username: this.username,
-        password: this.password,
-
-      })
-
-      for (let index = 0; index < this.allUsers.data.length ; index++) {
-        // console.log(this.allUsers.data[index].password);
-        // const element = this.getAllUsers.data[index];
-        // console.log(this.username, this.password , "hello");
-        if (this.allUsers.data[index].username == this.username && this.allUsers.data[index].password == this.password) {
-          let role = this.allUsers.data[index].role;
-          console.log("role.....", this.allUsers.data[index].role);
-          console.log(role);
-          if (role == "admin") {
-            router.push({ path: '/pollview', });
-          }
-          if (role == "user") {
-            router.push({ path: '/components/User' });
-          }
-        }
+    async login() {
+      const user = await this.$store.dispatch("loginDetails", {username: this.username, password: this.password})
+      console.log('user', user);
+      if(user.role === 'admin') {
+        this.$router.push('/pollview')
       }
-
+      else {
+        this.$router.push('/components/User')
+      }
     }
   },
 };

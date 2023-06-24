@@ -6,6 +6,7 @@ import LoginForm from '../components/LoginForm.vue'
 // import MainView from '../views/MainView.vue'
 import PollView from '../views/PollView.vue'
 import User from '../components/User.vue'
+// import Polls from '../components/Polls.vue'
 // import store from '../store/index'
 // import { IS_USER_AUTHENTICATE_GETTER } from '../store/index'
 const routes = [
@@ -28,6 +29,14 @@ const routes = [
     meta: { auth : true },
     
   },
+
+  // {
+  //   path: '/components/Polls',
+  //   name: 'polls',
+  //   component: Polls,
+  //   // meta: { auth : true }
+
+  // },
 
   {
     path: '/components/LoginForm',
@@ -63,18 +72,17 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to) => {
-  let open = localStorage.getItem("status");
-  console.log(open);
+router.beforeEach((to, from , next) => {
+  let user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
   // console.log(to.path);
   // console.log(from);
-  if(to.meta.auth && !open){
-     
-    return (
-      {name:'home'}
-    )
+  if(to.meta.auth && !user){
+     next('/')
   }
-
+  else {
+    next()
+  }
 });
 
 // if(from.path == '/pollview'  ){

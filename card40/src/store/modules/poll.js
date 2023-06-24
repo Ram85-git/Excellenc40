@@ -4,24 +4,39 @@ const state = {
 
     users: [],
     Polls: [],
-    deleteuser:[]
+    deleteuser: []
 
 };
 const getters = {
     allPolls: state => { state.Polls },
-    alldelete: state=>state.deleteuser
+    alldelete: state => state.deleteuser
 
 
 };
 
 
 const actions = {
-
     async addPoll(context, payload) {
-        const data = await axios.post(`http://65.108.77.50:3031/add_poll?title=${payload.title}%20&options=${payload.select}`);
-        console.log("Poll list ", data);
+        try {
+            let url = `http://65.108.77.50:3031/add_poll?title=${payload.title}&options=`;
+            payload.select.forEach((el, index) => {
+                console.log(el, index);
+                if (index == 0) {
+                    url = url + `${el}`
+                }
+                else {
+                    url = url + `____${el}`
+                }
+            })
 
+            const response = await axios.post(url);
+            console.log("set_users", response);
+        } catch (error) {
+            console.error("Failed to add poll:", error);
+        }
+       
     },
+
     async deletePoll({ commit }, id) {
         const res = await axios.post(`http://65.108.77.50:3031/delete_poll?id=${id}`);
         // commit("Delete_data", res.data)
@@ -37,8 +52,8 @@ const actions = {
         commit("snythin", deleuser);
     },
 
-    async deleteOptions({commit }, deleteid){
-       
+    async deleteOptions({ commit }, deleteid) {
+
         const del = await axios.delete(`http://65.108.77.50:3031/delete_poll_option?id=${deleteid.id}&option_text=${deleteid.text}`);
 
         alert("Delete option success")
@@ -46,8 +61,8 @@ const actions = {
 
 
     },
-    
-    async addNewOption({ commit }, optionid){
+
+    async addNewOption({ commit }, optionid) {
         console.log(optionid.id);
         const res = await axios.post(`http://65.108.77.50:3031/add_new_option?id=${optionid.id}&option_text=${optionid.option}`)
         alert("Edit Option successfull")
@@ -71,13 +86,13 @@ const mutations = {
         console.log('Mutation calling:', users);
         (state.users = users)
     },
-    Set_Option:(state,users) => {
+    Set_Option: (state, users) => {
         console.log('Editing  option:', users);
-       (state.users = users)
+        (state.users = users)
     },
-    snythin: (state,deleteuser)=> {
-        console.log("delete",deleteuser);
-        (state.deleteuser=deleteuser)
+    snythin: (state, deleteuser) => {
+        console.log("delete", deleteuser);
+        (state.deleteuser = deleteuser)
     }
 
     // Delete_Poll: (state, id) => {

@@ -7,9 +7,9 @@
             </v-btn>
 
         </div>
-        <v-btn  class="logout" type="button" @click="logOut()">
-                Log Out
-            </v-btn>
+        <v-btn class="logout" type="button" @click="logOut()">
+            Log Out
+        </v-btn>
 
         <h1>All Polls</h1>
         <v-dialog v-model="dialogVisible2" class="dig">
@@ -20,10 +20,10 @@
                 <v-card-text>
                     <v-form ref="formDialog">
                         <v-text-field v-model="dialogTitle" label="Title" required></v-text-field>
-                        <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select>
+                        <!-- <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select> -->
                         <v-text-field v-model="dialogSelect" label="Add option" hide-details="auto"></v-text-field>
-
-
+                        <i class="fa-solid fa-plus" v-on:click.prevent="addOptions2"></i>
+                        <div>{{ options }}</div>
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
@@ -80,12 +80,6 @@
                 <v-card-text>
                     <v-form ref="formDialog">
                         <v-text-field v-model="title" label="Title" required></v-text-field>
-                        <!-- <v-text-field v-model="option" label="Add option" hide-details="auto"></v-text-field> -->
-                        <!-- <v-select v-model="dialogSelect" :items="items" label="Option" required></v-select> -->
-                        <!-- <li>{{ dialogTitle }}</li>
-                           <li>{{dialogSelect  }}</li> -->
-
-
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
@@ -111,9 +105,7 @@
                 <v-card-actions>
 
                     <v-btn type="button" label="Title" color="blue" text v-on:click.prevent="AddOpt();">Submit</v-btn>
-                    <!-- <v-btn type="button"  label="Option"  color="blue" text v-on:click.prevent="DeleteOption();">Delete Opton</v-btn> -->
-                    <!-- <v-btn color="blue" text @click="EditPoll">Edit Poll</v-btn> -->
-                    <!-- <v-btn color="blue" text @click="DeletePoll">Delete Poll</v-btn> -->
+                    
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -127,7 +119,7 @@ import { mapGetters, mapActions } from 'vuex';
 import router from '@/router';
 import axios from 'axios';
 export default {
-    name: 'Po-ll',
+    name: `PollView`,
     watch: {
         tableData: {
             deep: true,
@@ -152,18 +144,13 @@ export default {
             text: '',
             title: "",
             select: "",
-            items: [
-                'val 1',
-                'val 2',
-                'val 3',
-                'val 4',
-                'val 5',
-                'val 6',
-            ],
+            // items: [
+
+            // ],
             dialogVisible2: false,
 
             dialogTitle: "",
-            dialogSelect: null,
+            dialogSelect: "",
             // tableData: [],
 
 
@@ -181,21 +168,28 @@ export default {
 
 
     methods: {
-        logOut(){
-            localStorage.removeItem('status');
+        addOptions2() {
+            // console.log(this.addOption)
+            this.options.push(this.dialogSelect);
+            console.log(this.options)
+            this.dialogSelect = "";
+        },
+
+        logOut() {
+            localStorage.removeItem("user");
             router.push('/')
 
         },
         openDialog() {
             this.dialogVisible2 = true;
         },
-        
+
         addPollFromDialog() {
             // this.$router.push('/mainview');
             // this.$router.push('/pollview')
             this.addPoll({
                 title: this.dialogTitle,
-                select: this.dialogSelect
+                select: this.options
             })
             this.dialogVisible2 = false;
         },
@@ -229,7 +223,7 @@ export default {
 
         },
         // ...mapActions(['deleteusers', 'editusers', 'editPoll' ]),
-        ...mapActions(['deleteusers', 'editPoll', 'addNewOption', 'deleteOptions' ,'addPoll', 'fetchData']),
+        ...mapActions(['deleteusers', 'editPoll', 'addNewOption', 'deleteOptions', 'addPoll', 'fetchData']),
 
         async fetchData() {
             try {
@@ -298,13 +292,12 @@ export default {
 </script>
 
 <style scoped>
-
-
-.logout{
+.logout {
     border: 1px solid;
     margin-left: 800px;
     margin-top: -64px;
 }
+
 .mainPoll {
     background-image: url('https://uploads-ssl.webflow.com/5a9ee6416e90d20001b20038/62ee03241cef28eaca144d50_Rectangle%201%20(40).svg');
     background-size: cover;

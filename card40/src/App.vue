@@ -10,6 +10,7 @@
          <router-link to="/pollview">Poll view</router-link>
          <router-link to="/components/LoginForm">login</router-link>
          <router-link to="/components/SignupForm">sign</router-link>
+         <!-- <router-link to="/components/Polls">New Polls</router-link> -->
         </div> 
         </div>
       <img>
