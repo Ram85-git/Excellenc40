@@ -52,7 +52,7 @@ export default {
 .mainback{
   display: flex;
   /* flex-direction: column; */
-  background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20190222/ourmid/pngtree-two-color-gradient-universal-background-material-color-matching-backgroundtwo-tone-image_51848.jpg');
+  background-image: url('https://thefulcrum.us/media-library/online-voting.jpg?id=24653929&width=900&height=514&quality=85&coordinates=0%2C0%2C0%2C0');
   background-repeat: no-repeat;
   background-size: cover;
   height: 700px;

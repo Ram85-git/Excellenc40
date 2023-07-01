@@ -59,7 +59,8 @@
                     <td>
                         <div v-for="(item, index) in option.options" :key="index">
                             {{ item.option }} {{ item._id }}
-                            <i class="fa-solid fa-trash" v-on:click.prevent="deleteOption(option._id, item.option)"></i>
+                          
+                            <i class="fa-solid fa-trash" id="DeleteOptions" v-on:click.prevent="deleteOption(option._id, item.option)"></i>
 
                         </div>
                         <i class="fa-sharp fa-solid fa-plus" id="add"
@@ -249,7 +250,7 @@ export default {
             let editid = {
                 id: this.id1,
                 title: this.title,
-
+     
             }
             this.editPoll(editid);
 
@@ -292,6 +293,9 @@ export default {
 </script>
 
 <style scoped>
+#DeleteOptions{
+    margin-left: 30px;
+}
 .logout {
     border: 1px solid;
     margin-left: 800px;
